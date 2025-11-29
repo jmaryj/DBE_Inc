@@ -5,7 +5,7 @@
         //Methods
 
         createTable: function(tableId, tableData){
-            console.log("in this.createTable");
+            //console.log("in this.createTable");
             //console.log("tableId = " + tableId);
            // console.log("tableBodyId = " + tableBodyId);
             if(document.getElementById(tableId)){
@@ -58,18 +58,18 @@
                         //console.log("thEle.appended to trEle");
                     }else{
                        // alert("creating new dataEld for 'td'");
-                        //const divEle = document.createElement('div');
-                        //divEle.textContent = colArray[colEle].label;
                         const tdEle = document.createElement('td');
                         //if(colArray[colEle].label.slice(0,5) == "media"){
                         if(colArray[colEle].image){
                        // console.log("adding img");
+                            console.log("image name = " + colArray[colEle].image.slice(11,colArray[colEle].image.length - 4));
+                            let imgName = colArray[colEle].image.slice(11,colArray[colEle].image.length - 4);
                             var imgEle = document.createElement('img');
                         //console.log("colArray[colEle].label = " + colArray[colEle].label);
                             imgEle.src = colArray[colEle].image;
                             //console.log("img.src: " + imgEle.src); 
                             imgEle.alt = "Rising Edge";
-                            imgEle.classList.add("rising-edge-img");
+                            imgEle.classList.add(imgName);
                             tdEle.appendChild(imgEle);
                         //console.log("imgEle appended");
                         }else{
