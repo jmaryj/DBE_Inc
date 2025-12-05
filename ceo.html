@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="css/ceo/mediaQuery_ceo_base_to_1400px-plus.css">
 	<script src="js/MainNavigation/NavHandler.js"></script>
 	<!--<script src="js/HTMLManager.js"></script>-->
+	<script src="js/educationManagers/EduHtmlManager.js"></script>
 
 	<style>
 		.selection-container {
@@ -31,17 +32,33 @@
 
 		.nav-dropdown {
 			position: relative;
-			z-index: 10;
+			z-index: 20;
 			;
 		}
 
 		.proposal-label {
 			position: absolute;
 			color: yellow;
+			cursor: pointer;
 			top: 35vh;
 			left: 43vw;
 			font-size: 2.5rem;
 			font-weight: bold;
+		}
+		
+        .ceo-contents{
+			/*background-image: url("media/imgs/BckGrnd/low-noise.png");*/
+			background-image: url("media/imgs/BckGrnd/olga-thelavart-unsplash-beige.png");
+			transition: opacity 2.5s;
+		}
+
+		.hide-ceo-contents{
+			opacity: 0;
+			/*z-index: -10;*/
+		}
+		.show-ceo-contents{
+			opacity: 1;
+			z-index: 10;
 		}
 	</style>
 </head>
@@ -69,17 +86,16 @@
 
 	<div class="page">
 		<h1 class="welcome-label">Welcome To<br>The CEO Page</h1>
-		<label class="proposal-label">Proposal</label>
+		<label class="proposal-label" onclick="EduHtmlManager.request('html/Proposal.html','ceo-contents-id')">Proposal</label>
 	</div>
-	</div>
-	<div id="ceo-contents-id" class="ceo-contents">
+	<div id="ceo-contents-id" class="ceo-contents hide-ceo-contents">
 	</div>
 
 
 	<script>
 		function init() {
 			NavHandler.init();
-			CeoHTML_Manager.init();
+			/*CeoHTML_Manager.init();*/
 		}
 	</script>
 

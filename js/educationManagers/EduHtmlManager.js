@@ -1,7 +1,8 @@
 
     let EduHtmlManager = {
         //Properties
-        eduContentsEle: {},
+        ceoEle: {},
+        eduEle: {},
         icDataEle: {},
         requestedFile: "",
         initialized: false,
@@ -9,40 +10,48 @@
     
         //Methods
         request: function(HTMLsourceFile, contentId){
-            if (!this.initialized){this.init(); this.initialized = true;};
-           // console.log("in EduHtmlManager.request() HTMLsourceFile =  " + HTMLsourceFile);
-        //alert("in request HTMLsourceFile =  " + HTMLsourceFile);
-           // console.log("contentId = " + contentId);
-    //        TrainingNavEventHandler.closeDropDown("training"); needs updating
-            //EduNavManager("training");
-            this.requestedFile = HTMLsourceFile;
-            //console.log("this.requestedFile = " + this.requestedFile);
-            this.load(contentId);
-        },
+            if (!this.initialized){this.init(contentId); this.initialized = true;};
+                console.log("in EduHtmlManager.request() HTMLsourceFile =  " + HTMLsourceFile);
+                //alert("in request HTMLsourceFile =  " + HTMLsourceFile);
+                console.log("contentId = " + contentId);
+                //TrainingNavEventHandler.closeDropDown("training"); needs updating
+                //EduNavManager("training");
+                this.requestedFile = HTMLsourceFile;
+                console.log("this.requestedFile = " + this.requestedFile);
+                this.load(contentId);
+            },
 
         load: function(contentId) {
            // console.log("in EduHtmlManager.load ");
             fetch(this.requestedFile)
                 .then(res => {
                     if (res.ok) {
-                        //console.log("res.ok");
+                        console.log("res.ok");
                         return res.text();
                     }
                 })
                 .then(resultHTML => {
                     //console.log("loading resultHTML contentId = " + contentId);
-                    this.eduContentsEle.innerHTML = resultHTML;
+                    console.log("contentId.slice(0,3) = " + contentId.slice(0,3));
+                    //this.contentsEle.innerHTML = resultHTML;
                     //console.log("scrolling Into View");
                     /*document.getElementById(contentId).scrollIntoView({block: 'start'});*/
-                
+                    if(contentId.slice(0,3) == "ceo"){
+                        this.ceoEle.innerHTML = resultHTML;
+                        console.log("this.contentsEle.style.zIndex = " + this.contentsEle.style.zIndex);
+                        console.log("sending to this.ceoShow()");
+                        this.ceoShow();
+                    }else{
+                        this.eduEle.innerHTML = resultHTML;
+                    }
                     //console.log("this.requestedFile = " + resultHTML);
                     //console.log("this.requestedFile.slice(0,24) = " + this.requestedFile.slice(0,24));
-                if(this.requestedFile.slice(0,24) == "html/Education/Training/"){
-                   // console.log("reset page to top of page");
-                    document.getElementById(contentId).scrollIntoView({block: 'start'});
-                    //PracticeTruthTableManager.initialize();
-                    //PracticeTruthTableManager.create("circuit","NotXor");
-                }
+                    if(this.requestedFile.slice(0,24) == "html/Education/Training/"){
+                    // console.log("reset page to top of page");
+                        document.getElementById(contentId).scrollIntoView({block: 'start'});
+                        //PracticeTruthTableManager.initialize();
+                        //PracticeTruthTableManager.create("circuit","NotXor");
+                    }
                     if(this.requestedFile == "html/Education/Training/GatesIcs.html"){
                         PracticeTruthTableManager.initialize();
                         PracticeTruthTableManager.create("circuit","NotXor");
@@ -156,15 +165,100 @@
             this.icDataEle.style.display = "none";
         },
 
-        init: function() {
-        //console.log("in EduHtmlManager.init()");
+        ceoShow: function(){ 
+            console.log("In ceoShow()");
+            this.ceoEle.classList.replace("hide-ceo-contents", "show-ceo-contents");
+            this.ceoEle.style.zIndex = 10;
+            console.log("leaving ceoShow()");
+        },
+
+        ceoHide: function(){ 
+            console.log("In ceoHide()");
+            this.ceoEle.classList.replace("hide-ceo-contents", "show-ceo-contents");
+            console.log("leaving ceoHide()");
+        },
+
+        ceoFinishTransition: function() {
+            console.log("in ceoFinishTransition");
+            //console.log("this.contentsEle.style.opacity =  " + this.contentsEle.style.opacity);
+            if (this.ceoEle.style.zIndex == 10) {
+                this.ceoEle.style.zIndex = -10;
+            }/*else{
+                this.ceoEle.style.zIndex = 10;
+            }*/
+        },
+
+        init: function(contentId) {
+        console.log("in EduHtmlManager.init()");
          //alert("this.eduNavOneContentsEle.classList = " + this.eduNavOneContentsEle.classList);
-            this.eduContentsEle = document.getElementById("edu-contents-id");
+            if(contentId.slice(0,3) == "ceo"){
+                this.ceoEle = document.getElementById("ceo-contents-id");
+                this.ceoEle.addEventListener("transitionend", this.ceoFinishTransition, false);
+            }else{
+                this.eduEle = document.getElementById("edu-contents-id");
+                this.icDataEle = document.getElementById("ic-data-contents-id");
+            }
         // alert("this.eduContentsEle.classList = " + this.eduContentsEle.classList);
           //  this.eduContentsEle.addEventListener("transitionend", this.show().bind, false);
-            this.eduContentsEle.style.opacity = 1;   /*eduTransitionHasEnded*/
+            //this.contentsEle.style.opacity = 1;   /*eduTransitionHasEnded*/
        // alert("after this.eduContentsEle");
-            this.icDataEle = document.getElementById("ic-data-contents-id");
-        //console.log("end of EduHtmlManager.init()");
+        console.log("end of EduHtmlManager.init()");
         }
     }
+
+    /*BEGIN CeoHTML_Manager */
+    let CeoHTML_Manager = {
+        //Properties
+        ceoEle: {},
+        initialized: false,
+
+        //Methods
+       /* load: function(HTMLsourceFile) {
+           //alert("in load HTMLsourceFile =  " + HTMLsourceFile);
+            this.ceoEle.innerHTML = "";
+            this.ceoEle.style.zIndex = 10;
+        // alert("this.ceoEle.style.zIndex =  " + this.ceoEle.style.zIndex);
+            this.ceoEle.style.opacity = 1;
+            this.ceoEle.style.display = "block";
+            fetch(HTMLsourceFile)
+                .then(res => {
+                   // alert("in res =>");
+                    if (res.ok) {
+                        //alert("res.ok");
+                        return res.text();
+                    }
+                })
+                .then(resultHTML => {
+                   // alert("loading resultHTML");
+                    this.ceoEle.innerHTML = resultHTML;
+                })
+        },*/
+
+        close: function() {
+            if(!this.initialized){this.init(); this.initialized = true;} 
+            console.log("In CeoHTML_Manager.close()");
+            //console.log("this.ceoEle.style.opacity =  " + this.ceoEle.style.opacity);
+            /*this.ceoEle.innerHTML = "";*/
+            this.ceoEle.classList.replace("hide-proposal", "show-proposal");
+            //this.ceoEle.classList.add("hide-proposal");
+            console.log("leaving close function");
+        },
+
+        ceoFinishTransition: function() {
+            console.log("in ceoFinishTransition");
+            console.log("this.ceoEle.style.opacity =  " + this.ceoEle.style.opacity);
+            if (this.ceoEle.style.opacity == 0) {
+                this.ceoEle.style.zIndex = -10;
+            }/*else{
+                this.ceoEle.style.zIndex = 10;
+            }*/
+        },
+
+        init: function() {
+            console.log("in CeoHTML_Manager init()");
+            this.ceoEle = document.getElementById("ceo-contents-id");
+            this.ceoEle.addEventListener("transitionend", this.ceoFinishTransition(), false);
+            console.log("leaving CeoHTML_Manager init()");
+        }
+    }
+/* END CeoHTML_Manager */	

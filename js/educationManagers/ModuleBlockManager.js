@@ -39,13 +39,13 @@
             },
             //Methods
             display: function(target){
-              //  alert("this.selectedBlock = " + this.selectedBlock + "  target = " + target);
+              console.log("this.selectedBlock = " + this.selectedBlock + "  target = " + target);
                 document.getElementById(this.selectedBlock + "-button-id").classList.remove("selected-block-button");
                 document.getElementById(target + "-button-id").classList.add("selected-block-button");
               //  alert("in between"); 
                 let labelEle = document.getElementById("block-label-id");
                 let imgEle = document.getElementById("block-img-id");
-               // alert("entering switch");
+               console.log("entering switch where target = " + target);
                 switch (target){
                     case ("memory"):
                         labelEle.innerHTML = this.selectionData.memory.title;
@@ -87,7 +87,7 @@
                 this.selectedBlock = target;
             },
             changeMode: function(){
-               // alert("in changeMode");
+               console.log("in ModuleBlockManager.changeMode()");
                 let modeBlockEle = document.getElementById("mode-block-id");
                 let mode74lsEle = document.getElementById("mode-74ls-id");
                 if(this.selectedMode == 0){

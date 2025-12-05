@@ -37,9 +37,10 @@
         font-weight: bold;
         color: black;
         transition: opacity 1s;
-        opacity: 0;
+       /* opacity: 0;
         z-index: -10;
-        background-image: url("media/imgs/olga-thelavart-unsplash.png");
+        background-image: url("media/imgs/BckGrnd/olga-thelavart-unsplash-beige.png");
+        background-image: url("media/imgs/BckGrnd/low-noise.png");*/
         background-size: cover;
         overflow-x: hidden; 
         overflow-y: scroll; 

@@ -33,6 +33,7 @@
 	<script src="js/educationManagers/EduNavManager.js"></script>
 	<script src="js/educationManagers/EduHtmlManager.js"></script>
 	<script src="js/educationManagers/QuestionAnswerManager.js"></script>
+	<script src="js/educationManagers/ModuleBlockManager.js"></script>
 	<script src="js/TableGenerator.js"></script>
     <script src="js/TableData/LS7400TableData.js"></script>
     <script src="js/TableData/LS7402TableData.js"></script>
@@ -83,14 +84,14 @@
             <nav id="videos-container-id" class="videos-container">
                 <div class="videos-label-container">
                     <!--<label class="videos-label" onmouseover="EduNavManager.showHide('videos')">Videos</label> -->
-                    <label class="videos-label" onclick="EduHtmlManager.request('html/Education/Resources/BenEaterVideos.html')">Videos</label>
+                    <label class="videos-label" onclick="EduHtmlManager.request('html/Education/Resources/BenEaterVideos.html','edu-contents-id')">Videos</label>
                 </div>
             </nav>
     <!--,EduHtmlManager.request('html/Blank.html','nav')-->
             <nav id="datasheets-container-id" class="datasheets-container">
                 <div class="datasheets-label-container">
                     <!--<label class="datasheets-label" onmouseover="EduNavManager.showHide('datasheets')">Data Sheets</label>-->
-                    <label class="datasheets-label" onclick="EduHtmlManager.request('html/Education/Resources/DataSheets.html')">IC:Data</label>
+                    <label class="datasheets-label" onclick="EduHtmlManager.request('html/Education/Resources/DataSheets.html','edu-contents-id')">IC:Data</label>
                 </div>																						<!--,'contents','datasheets'-->
             </nav>	
         </nav>
@@ -141,7 +142,7 @@
                         
                         <li><a href="#" onclick="EduHtmlManager.request('html/Education/Training/IntroductionArchitecture.html','intro-architecture-contents-id'); 
                             EduNavManager.openCloseDropdown('architecture-dropdown')">Introduction</a></li>
-                        <li><a href="#" onclick="EduHtmlManager.request('html/Education/Training/HardwareArchitecture_OnHOLD.html','hardware-nav-id'); 
+                        <li><a href="#" onclick="EduHtmlManager.request('html/Education/Training/HardwareArchitecture.html','hardware-nav-id'); 
                             EduNavManager.openCloseDropdown('architecture-dropdown')">Hardware</a></li>
                         <li><a href="#" onclick="EduHtmlManager.request('html/Education/Training/SoftwareArchitecture.html','hardware-nav-id'); 
                             EduNavManager.openCloseDropdown('architecture-dropdown')">Software</a></li>
